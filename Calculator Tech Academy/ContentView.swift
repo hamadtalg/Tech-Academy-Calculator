@@ -64,7 +64,7 @@ struct ContentView: View {
                             .font(.system(size:32))
                             .frame(width: 70, height: 70)
                             .background(Color(UIColor(red: 118/255.0, green: 118/255.0, blue: 118/255.0, alpha:1)))
-                            .foregroundColor(.white)
+                            .foregroundColor(.black)
                             .cornerRadius(35)
                     })
                 }
