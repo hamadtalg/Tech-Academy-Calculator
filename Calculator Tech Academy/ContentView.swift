@@ -23,7 +23,7 @@ enum CalculatorButton: String {
     case multiply = "X"
     case divide = "/"
     case equal = "="
-    case clear = "c"
+    case clear = "AC"
     case decimal = "."
     case percent = "%"
     case negative = "+/-"
@@ -80,7 +80,7 @@ struct ContentView: View {
     }
     func didtap(button:CalculatorButton){
         switch button {
-        case .add, .subtract, .multiply, .divide, .equal:
+        case .add, .subtract, .multiply, .divide, .clear, .equal:
             if button == .add {
                 self.currentOperation = .add
                 self.runningNumber += Int(self.value) ?? 0
@@ -97,6 +97,10 @@ struct ContentView: View {
                 self.currentOperation = .divide
                 self.runningNumber += Int(self.value) ?? 0
             }
+            else if button == .clear {
+            
+                self.runningNumber = Int("0") ?? 0
+            }
             else if button == .equal {
                 let runningValue = self.runningNumber
                 let currentValue = Int(self.value) ?? 0
@@ -105,10 +109,13 @@ struct ContentView: View {
                     case .subtract: self.value = "\(runningValue - currentValue)"
                     case .multiply: self.value = "\(runningValue * currentValue)"
                     case .divide: self.value = "\(runningValue / currentValue)"
+                    case .none:
+                        break
                 }
             }
-        case .clear:
-            self.value = "0"
+            if button != .equal{
+                self.value = "0"
+            }
         case .decimal, .negative, .percent:
             break
         default:
